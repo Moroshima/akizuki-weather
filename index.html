@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" charset="utf-8">
+    <!-- 自定义CSS布局 -->
+    <link rel="stylesheet" href="index.css" type="text/css"/>
+    
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.3.0/dist/echarts.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    <!--背景部分归属div-->
+    <div id="back">
+        <div id="transparent"></div>
+    </div>
+
+
+    <!--主体布局div分层-->
+    <div class="container">
+        <!-- 顶部留空 -->
+        <div class="row clearfix">
+            <div id="topMain" class="col-md-12 column">
+                Akizuki Weather
+            </div>
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="row clearfix">
+            <div id="searchMain" class="col-md-12 column">
+                <!--输入框-->
+                <form id="read" autocomplete="off">
+                    <input id="readin" type="text" placeholder="城市">
+                    <input type="text" style="display:none">
+                </form>
+                <div style="width:5px"></div>
+                <!--查询按钮-->
+                <button id="search" class="Search">查询</button>
+            </div>
+        </div>
+
+        <!-- 搜索栏与主体功能模块之间的留空 -->
+        <div class="row clearfix">
+            <div id="spacing" class="col-md-12 column">
+            </div>
+        </div>
+
+        <!-- 天气预报显示主体 -->
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div id="middleMain">
+                        <!-- 左侧当日天气卡片 -->
+                        <div class="col-md-5 column">
+                            <div id="leftMain">
+                                <div style="height:28px;"></div>
+                                <div id="locationName" class="fubuki">--</div>
+                                <!-- 套flex以实现当前气温、当日最高与最低气温的排列显示 -->
+                                <div id="nowtemp">
+                                    <div id="nowTemp" class="fubuki">--</div>
+                                    <div style="width:3px"></div>    <!-- 空div块实现页面内各div间的合理布局 -->
+                                    <div id="maxmin">
+                                        <div id="maxTemp" class="fubuki" style="font-size:18px;">--</div>
+                                        <div style="height:3px"></div>
+                                        <div id="minTemp" class="fubuki" style="font-size:18px;">--</div>
+                                    </div>
+                                </div>
+                                <div id="nowWeather" class="fubuki" style="font-size:18px;font-weight:500;">--</div>
+                                <div style="height:6px"></div>
+                                <div id="realFeel" class="fubuki"style="font-size:16px;">--</div>
+                                <div style="height:3px"></div>
+                                <div id="moon" class="fubuki">--</div>
+                                <div style="height:84px"></div>
+                                <div id="information" class="fubuki"></div>
+                                <div style="height:2px"></div>
+                                <div id="updateTime" class="fubuki">--</div>
+                            </div>
+                        </div>
+                        <div style="width:18px"></div>
+                        <!-- 右侧未来四天天气预报模块 -->
+                        <div id="rightMain" class="col-md-6 column">
+                            <div id="rightA" class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <!-- block从A至D对应从上至下的四张卡片 -->
+                                    <div id="blockA" class="rightBlock">
+                                        <!-- 小卡片左侧的日期星期显示 -->
+                                        <div class="dayWeekDay">
+                                            <div id="whichDayA" class="dateW">---</div>
+                                            <div style="height:3px"></div>
+                                            <div id="whichWeekdayA" class="weekW">---</div>
+                                        </div>
+                                        <div style="width:170px"></div>
+                                        <!-- 右侧天气预报内容显示 -->
+                                        <div class="weatherWind" class="weatherW">
+                                            <div class="weatherTemp">
+                                                <div id="whatWeatherA">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatTempMaxA">--</div>
+                                                <div style="width:2px;"></div>
+                                                <div class="transparent">/</div>
+                                                <div style="width:2px;"></div>
+                                                <div id="whatTempMinA" class="transparent">--</div>
+                                            </div>
+                                            <div style="height:3px"></div>
+                                            <div class="windWindspeed" class="windW">
+                                                <div id="whatWindA">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatWindspeedA">---</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="empty"></div>
+                            <div id="rightB" class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <div id="blockB" class="rightBlock">
+                                        <div class="dayWeekDay">
+                                            <div id="whichDayB" class="dateW">---</div>
+                                            <div style="height:3px"></div>
+                                            <div id="whichWeekdayB" class="weekW">---</div>
+                                        </div>
+                                        <div style="width:170px"></div>
+                                        <div class="weatherWind" class="weatherW">
+                                            <div class="weatherTemp">
+                                                <div id="whatWeatherB">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatTempMaxB">--</div>
+                                                <div style="width:2px;"></div>
+                                                <div class="transparent">/</div>
+                                                <div style="width:2px;"></div>
+                                                <div id="whatTempMinB" class="transparent">--</div>
+                                            </div>
+                                            <div style="height:3px"></div>
+                                            <div class="windWindspeed" class="windW">
+                                                <div id="whatWindB">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatWindspeedB">---</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="empty"></div>
+                            <div id="rightC" class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <div id="blockC" class="rightBlock">
+                                        <div class="dayWeekDay">
+                                            <div id="whichDayC" class="dateW">---</div>
+                                            <div style="height:3px"></div>
+                                            <div id="whichWeekdayC" class="weekW">---</div>
+                                        </div>
+                                        <div style="width:170px"></div>
+                                        <div class="weatherWind" class="weatherW">
+                                            <div class="weatherTemp">
+                                                <div id="whatWeatherC">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatTempMaxC">--</div>
+                                                <div style="width:2px;"></div>
+                                                <div class="transparent">/</div>
+                                                <div style="width:2px;"></div>
+                                                <div id="whatTempMinC" class="transparent">--</div>
+                                            </div>
+                                            <div style="height:3px"></div>
+                                            <div class="windWindspeed" class="windW">
+                                                <div id="whatWindC">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatWindspeedC">---</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="empty"></div>
+                            <div id="rightD" class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <div id="blockD" class="rightBlock">
+                                        <div class="dayWeekDay">
+                                            <div id="whichDayD" class="dateW">---</div>
+                                            <div style="height:3px"></div>
+                                            <div id="whichWeekdayD" class="weekW">---</div>
+                                        </div>
+                                        <div style="width:170px"></div>
+                                        <div class="weatherWind" class="weatherW">
+                                            <div class="weatherTemp">
+                                                <div id="whatWeatherD">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatTempMaxD">--</div>
+                                                <div style="width:2px;"></div>
+                                                <div class="transparent">/</div>
+                                                <div style="width:2px;"></div>
+                                                <div id="whatTempMinD" class="transparent">--</div>
+                                            </div>
+                                            <div style="height:3px"></div>
+                                            <div class="windWindspeed" class="windW">
+                                                <div id="whatWindD">---</div>
+                                                <div style="width:12px"></div>
+                                                <div id="whatWindspeedD">---</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下部可切换显示24小时天气预报模块 -->
+        <div style="height:30px"></div>
+        <div class="row clearfix">
+            <div id="bottomBlock" class="col-md-12 column">
+                <div style="height:2px"></div>
+                <div id="block" style="display:block" class="kongo">
+                    <div style="height:10px"></div>
+                    <div id="switchBlock">
+                        <div style="width:980px"></div>
+                        <button type="button" id="switchA" class="hiei">点击切换</button>
+                    </div>
+                    <div style="height:5px"></div>
+                    <div id="sakurawa" style="width:14px;display:flex;float:left;color:transparent">------</div>
+                    <div id="bBlockA" class="sakura">
+                        <div id="timeA" class="bTime">--</div>
+                        <div id="tempA" class="bTemp">--</div>
+                        <div id="weatherA" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windA" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockB" class="sakura">
+                        <div id="timeB" class="bTime">--</div>
+                        <div id="tempB" class="bTemp">--</div>
+                        <div id="weatherB" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windB" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockC" class="sakura">
+                        <div id="timeC" class="bTime">--</div>
+                        <div id="tempC" class="bTemp">--</div>
+                        <div id="weatherC" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windC" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockD" class="sakura">
+                        <div id="timeD" class="bTime">--</div>
+                        <div id="tempD" class="bTemp">--</div>
+                        <div id="weatherD" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windD" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockE" class="sakura">
+                        <div id="timeE" class="bTime">--</div>
+                        <div id="tempE" class="bTemp">--</div>
+                        <div id="weatherE" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windE" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockF" class="sakura">
+                        <div id="timeF" class="bTime">--</div>
+                        <div id="tempF" class="bTemp">--</div>
+                        <div id="weatherF" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windF" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockG" class="sakura">
+                        <div id="timeG" class="bTime">--</div>
+                        <div id="tempG" class="bTemp">--</div>
+                        <div id="weatherG" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windG" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockH" class="sakura">
+                        <div id="timeH" class="bTime">--</div>
+                        <div id="tempH" class="bTemp">--</div>
+                        <div id="weatherH" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windH" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockI" class="sakura">
+                        <div id="timeI" class="bTime">--</div>
+                        <div id="tempI" class="bTemp">--</div>
+                        <div id="weatherI" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windI" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockJ" class="sakura">
+                        <div id="timeJ" class="bTime">--</div>
+                        <div id="tempJ" class="bTemp">--</div>
+                        <div id="weatherJ" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windJ" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockK" class="sakura">
+                        <div id="timeK" class="bTime">--</div>
+                        <div id="tempK" class="bTemp">--</div>
+                        <div id="weatherK" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windK" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockL" class="sakura">
+                        <div id="timeL" class="bTime">--</div>
+                        <div id="tempL" class="bTemp">--</div>
+                        <div id="weatherL" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windL" class="bWind">--</div>
+                    </div>
+                    <div id="bBlockM" class="sakura">
+                        <div id="timeM" class="bTime">--</div>
+                        <div id="tempM" class="bTemp">--</div>
+                        <div id="weatherM" class="bWeather">--</div>
+                        <div style="height:2px;"></div>
+                        <div id="windM" class="bWind">--</div>
+                    </div>
+                </div>
+                <div id="chart" style="display:none;" class="kongo">
+                    <div style="height:10px"></div>
+                    <div id="switchBlock">
+                        <div style="width:980px"></div>
+                        <button type="button" id="switchB" class="hiei">点击切换</button>
+                    </div>
+                    <div id="forecastChart" style="width:1070px;height:141px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 加载页面时将获取到的定位传给Ajax模块 -->
+    <script>
+        $.ajax
+        ({
+            url:'https://apis.map.qq.com/ws/location/v1/ip?key=TDKBZ-ZMSW4-YESU6-XSKXB-DDIVF-6QFOU&output=jsonp',    //调用腾讯地图API
+            type:"get",
+            dataType:'jsonp',    //腾讯地图API跨域只能通过JSONP来实现
+            jsonp:'callback',
+            success:
+            function(location)
+            {
+                if(location.status==0)
+                {
+                    //console.log(location);
+                    //console.log(location.result.ad_info.city);
+                    locationLoad(location.result.ad_info.city);
+                }
+                else
+                {
+                    alert("我们无法获取到您的定位，请手动输入查询！")
+                }
+            },
+            error:function(error)
+            {
+                console.log(error);
+            }
+        });
+        function locationLoad(cityNow)
+        {
+            var cityName=cityNow;
+            document.getElementById("information").innerHTML="ⓘ该定位基于您的IP地址所得";    //提示用户信息来源，在手动搜索时则不会显示
+            ajaxGet(cityName);    //暂时性关闭刷新即访问API的功能以省钱 
+        }
+    </script>
+
+    <!-- 在按下按钮或敲下回车时发送Ajax请求获取数据 -->
+    <script>
+            $("body").keydown(function()
+            {
+                if (event.keyCode == "13")    //使得输入完内容后按下回车键也能实现城市的提交
+                {
+                    $('button[id=search]').click();
+                }
+            });
+            $('button[id=search]').click(function(event)    //按下按钮后实现城市的提交
+            {
+                var cityName = $('input[type=text]').val();
+                document.getElementById("information").innerHTML="";
+                ajaxGet(cityName);
+            }); 
+    </script>
+
+    <!-- 获取天气的Ajax请求主体函数 -->
+    <script>
+        function ajaxGet(cityName)
+        {
+        $.ajax    //获取城市对应ID
+            ({
+                url:`https://geoapi.qweather.com/v2/city/lookup?location=${cityName}&key=58be365a356d42e2ae0fc80432bb426e`,
+                type:"get",
+                success:function(data)
+                {
+                    console.log(data);
+                    if(data.code==200)
+                    {
+                        var uid=data.location[0].id;
+                        //console.log(uid);
+                        document.getElementById("locationName").innerHTML=`${data.location[0].name}`;
+
+                        $.ajax    //通过城市对应ID查询未来7天的天气
+                        ({
+                            url:`https://api.qweather.com/v7/weather/15d?location=${uid}&key=f8567439d3d14b34a3b282fa0c673c4b`,
+                            type:"get",
+                            success:function(weather)
+                            {
+                                console.log(weather);
+                                leftMainBlockPut(weather);
+                                rightMainBlockPut(weather);
+                            },
+                            error:function(error)
+                            {
+                                console.log(error);
+                            }
+                        });
+
+                        $.ajax    //通过城市对应ID查询未来24小时的天气
+                        ({
+                            url:`https://api.qweather.com/v7/weather/24h?location=${uid}&key=f8567439d3d14b34a3b282fa0c673c4b`,
+                            type:"get",
+                            success:function(perHour)
+                            {
+                                console.log(perHour);
+                                bottomRefresh(perHour);
+                                loadToChart(perHour);
+                            },
+                            error:function(error)
+                            {
+                                console.log(error);
+                            }
+                        });
+
+                        $.ajax    //获取实时天气
+                        ({
+                            url:`https://api.qweather.com/v7/weather/now?location=${uid}&key=f8567439d3d14b34a3b282fa0c673c4b`,
+                            type:"get",
+                            success:function(weather)
+                            {
+                                console.log(weather);
+                                nowLoad(weather);
+                                changePic(weather);
+                            },
+                            error:function(error)
+                            {
+                                console.log(error);
+                            }
+                        });
+                    }
+                    else if(data.code==400){
+                        alert("您尚未输入任何内容！");
+                    }
+                    else if(data.code==404){
+                        alert("请检查您输入的地址是否正确！")
+                    }
+                },
+                error:function(error)
+                {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+    <!-- 切换底部栏内容 -->
+    <script type='text/javascript'>
+        function changeContent(content)
+        {
+            /*错位切换block与none以实现底部栏内容切换*/
+            if(content.style.display == 'block')
+            {
+                content.style.display = 'none';
+            } 
+            else
+            {
+                content.style.display = 'block';
+            }
+        }
+
+        var display = document.getElementById("switchA");
+        display.onclick = function()
+        {
+            var block = document.getElementById("block");
+            var chart = document.getElementById("chart");
+            changeContent(block);
+            changeContent(chart);
+            return false;
+        }
+
+        var display = document.getElementById("switchB");
+        display.onclick = function()
+        {
+            var block = document.getElementById("block");
+            var chart = document.getElementById("chart");
+            changeContent(block);
+            changeContent(chart);
+            return false;
+        }
+    </script>
+
+    <!--Echarts绘制底部栏温度变化折线图-->
+    <script>
+        /*引入Echarts绘制温度折线图*/
+        var myChart = echarts.init(document.getElementById('forecastChart'));
+        /*显示标题，图例和空的坐标轴*/
+        myChart.setOption
+        ({
+            color:['#fff'],
+            tooltip:
+            {
+                trigger: 'axis',
+                axisPointer:
+                {
+                    type: 'none'
+                }
+            },
+            xAxis:
+            {
+                axisLabel:
+                {
+                    show: true,
+                    textStyle:
+                    {
+                        color: '#fff',  //更改坐标轴文字颜色
+                        fontSize : 15      //更改坐标轴文字大小
+                    }
+                },
+                axisLine:
+                {
+                    show: false
+                },
+                axisTick:
+                {
+                    show: false
+                },
+                splitLine:
+                {
+                    show:false
+                },
+                data: []
+            },
+            yAxis:
+            {
+                axisLabel:
+                {
+                    show: false
+                },
+                axisLine:
+                {
+                    show: false
+                },
+                axisTick:
+                {
+                    show: false
+                },
+                splitLine:
+                {
+                    show:false
+                },
+                type: 'value',
+            },
+            series:
+            [{
+                name: '气温(摄氏度)',
+                type: 'line',
+                data: [],
+            }],
+            grid:
+            {
+                x: 30,
+                y: 30,
+                x2: 10,
+                y2: 40
+            },
+        });
+        //myChart.showLoading();    //显示加载动画
+        function loadToChart(data)
+        {
+            //myChart.hideLoading();    //隐藏加载动画
+            myChart.setOption
+            ({
+                xAxis: {
+                    type: 'category',
+                    data:
+                    [
+                        whatTime(data.hourly[0].fxTime),
+                        whatTime(data.hourly[1].fxTime),
+                        whatTime(data.hourly[2].fxTime),
+                        whatTime(data.hourly[3].fxTime),
+                        whatTime(data.hourly[4].fxTime),
+                        whatTime(data.hourly[5].fxTime),
+                        whatTime(data.hourly[6].fxTime),
+                        whatTime(data.hourly[7].fxTime),
+                        whatTime(data.hourly[8].fxTime),
+                        whatTime(data.hourly[9].fxTime),
+                        whatTime(data.hourly[10].fxTime),
+                        whatTime(data.hourly[11].fxTime),
+                        whatTime(data.hourly[12].fxTime),
+                        whatTime(data.hourly[13].fxTime)
+                    ]
+                },
+                yAxis:
+                {
+                    type: 'value'
+                },
+                series: [{
+                    data:
+                    [
+                        data.hourly[0].temp,
+                        data.hourly[1].temp,
+                        data.hourly[2].temp,
+                        data.hourly[3].temp,
+                        data.hourly[4].temp,
+                        data.hourly[5].temp,
+                        data.hourly[6].temp,
+                        data.hourly[7].temp,
+                        data.hourly[8].temp,
+                        data.hourly[9].temp,
+                        data.hourly[10].temp,
+                        data.hourly[11].temp,
+                        data.hourly[12].temp,
+                        data.hourly[13].temp,
+                    ],
+                    type: 'line',
+                    smooth: true
+                }]
+            });
+            /*图表绘制结束*/
+        }
+    </script>
+
+    <!-- 加载主体左部当日天气卡片的数据 -->
+    <script>
+        function leftMainBlockPut(weather)
+        {
+            //console.log(weather.updateTime);
+            var year,month,date,region;
+            var timeArray=weather.updateTime.split('');
+            var hourNow=timeArray[11]+timeArray[12];
+            var minuteNow=timeArray[14]+timeArray[15];
+            document.getElementById("maxTemp").innerHTML=weather.daily[0].tempMax+"℃";
+            document.getElementById("minTemp").innerHTML=weather.daily[0].tempMin+"℃";
+            document.getElementById("moon").innerHTML=weather.daily[0].moonPhase;
+            document.getElementById("updateTime").innerHTML="更新时间 "+`${hourNow}:${minuteNow}`;
+        }
+    </script>
+
+    <!-- 利用当前气象观测数据加载必要数据至左侧当日天气卡片与下部天气预报栏 -->
+    <script>
+        function nowLoad(data)
+        {
+            document.getElementById("timeA").innerHTML="现在";
+            document.getElementById("tempA").innerHTML=data.now.temp+"℃";
+            document.getElementById("weatherA").innerHTML=data.now.text;
+            document.getElementById("windA").innerHTML=data.now.windDir;
+
+            document.getElementById("nowTemp").innerHTML=data.now.temp+"°";    //实时温度
+            document.getElementById("nowWeather").innerHTML=data.now.text;    //实时天气
+            /*计算体感温度*/
+            var eUnknow = (parseInt(data.now.humidity)/100)*6.105*(2.718281**((17.27*parseInt(data.now.temp))/(237.27+parseInt(data.now.temp))));    //计算水汽压
+            var realFeel = 1.07*parseInt(data.now.temp)+0.2*eUnknow-0.065*(parseInt(data.now.windSpeed)/36)-2.7;    //计算体感温度
+            //console.log(eUnknow);
+            document.getElementById("realFeel").innerHTML="体感温度 "+Math.round(realFeel)+"℃";
+        }
+    </script>
+
+    <!-- 加载右侧四张卡片对应未来四天的天气预报数据 -->
+    <script>
+        function rightMainBlockPut(data)
+        {
+            document.getElementById("whichDayA").innerHTML=data.daily[1].fxDate
+            document.getElementById("whichWeekdayA").innerHTML=findDay(1,data);
+            document.getElementById("whatWeatherA").innerHTML=compareWeather(data.daily[1].textDay,data.daily[1].textNight);
+            document.getElementById("whatTempMaxA").innerHTML=data.daily[1].tempMax+"℃";
+            document.getElementById("whatTempMinA").innerHTML=data.daily[1].tempMin+"℃";
+            document.getElementById("whatWindA").innerHTML=compareWeather(data.daily[1].windDirDay,data.daily[1].windDirNight);
+            document.getElementById("whatWindspeedA").innerHTML="风速 "+windspeedChange(data.daily[1].windScaleDay,data.daily[1].windScaleNight)+"级";
+
+            document.getElementById("whichDayB").innerHTML=data.daily[2].fxDate
+            document.getElementById("whichWeekdayB").innerHTML=findDay(2,data);
+            document.getElementById("whatWeatherB").innerHTML=compareWeather(data.daily[2].textDay,data.daily[2].textNight);
+            document.getElementById("whatTempMaxB").innerHTML=data.daily[2].tempMax+"℃";
+            document.getElementById("whatTempMinB").innerHTML=data.daily[2].tempMin+"℃";
+            document.getElementById("whatWindB").innerHTML=compareWeather(data.daily[2].windDirDay,data.daily[2].windDirNight);
+            document.getElementById("whatWindspeedB").innerHTML="风速 "+windspeedChange(data.daily[2].windScaleDay,data.daily[2].windScaleNight)+"级";
+
+            document.getElementById("whichDayC").innerHTML=data.daily[3].fxDate
+            document.getElementById("whichWeekdayC").innerHTML=findDay(3,data);
+            document.getElementById("whatWeatherC").innerHTML=compareWeather(data.daily[3].textDay,data.daily[3].textNight);
+            document.getElementById("whatTempMaxC").innerHTML=data.daily[3].tempMax+"℃";
+            document.getElementById("whatTempMinC").innerHTML=data.daily[3].tempMin+"℃";
+            document.getElementById("whatWindC").innerHTML=compareWeather(data.daily[3].windDirDay,data.daily[3].windDirNight);
+            document.getElementById("whatWindspeedC").innerHTML="风速 "+windspeedChange(data.daily[3].windScaleDay,data.daily[3].windScaleNight)+"级";
+
+            document.getElementById("whichDayD").innerHTML=data.daily[4].fxDate
+            document.getElementById("whichWeekdayD").innerHTML=findDay(4,data);
+            document.getElementById("whatWeatherD").innerHTML=compareWeather(data.daily[4].textDay,data.daily[4].textNight);
+            document.getElementById("whatTempMaxD").innerHTML=data.daily[4].tempMax+"℃";
+            document.getElementById("whatTempMinD").innerHTML=data.daily[4].tempMin+"℃";
+            document.getElementById("whatWindD").innerHTML=compareWeather(data.daily[4].windDirDay,data.daily[4].windDirNight);
+            document.getElementById("whatWindspeedD").innerHTML="风速 "+windspeedChange(data.daily[4].windScaleDay,data.daily[4].windScaleNight)+"级";
+        }
+    </script>
+
+    <script>
+        function bottomRefresh(data)
+        {
+            document.getElementById("timeB").innerHTML=whatTime(data.hourly[0].fxTime);
+            document.getElementById("tempB").innerHTML=data.hourly[0].temp+"℃";
+            document.getElementById("weatherB").innerHTML=data.hourly[0].text;
+            document.getElementById("windB").innerHTML=data.hourly[0].windDir;
+
+            document.getElementById("timeC").innerHTML=whatTime(data.hourly[1].fxTime);
+            document.getElementById("tempC").innerHTML=data.hourly[1].temp+"℃";
+            document.getElementById("weatherC").innerHTML=data.hourly[1].text;
+            document.getElementById("windC").innerHTML=data.hourly[1].windDir;
+
+            document.getElementById("timeD").innerHTML=whatTime(data.hourly[2].fxTime);
+            document.getElementById("tempD").innerHTML=data.hourly[2].temp+"℃";
+            document.getElementById("weatherD").innerHTML=data.hourly[2].text;
+            document.getElementById("windD").innerHTML=data.hourly[2].windDir;
+
+            document.getElementById("timeE").innerHTML=whatTime(data.hourly[3].fxTime);
+            document.getElementById("tempE").innerHTML=data.hourly[3].temp+"℃";
+            document.getElementById("weatherE").innerHTML=data.hourly[3].text;
+            document.getElementById("windE").innerHTML=data.hourly[3].windDir;
+
+            document.getElementById("timeF").innerHTML=whatTime(data.hourly[4].fxTime);
+            document.getElementById("tempF").innerHTML=data.hourly[4].temp+"℃";
+            document.getElementById("weatherF").innerHTML=data.hourly[4].text;
+            document.getElementById("windF").innerHTML=data.hourly[4].windDir;
+
+            document.getElementById("timeG").innerHTML=whatTime(data.hourly[5].fxTime);
+            document.getElementById("tempG").innerHTML=data.hourly[5].temp+"℃";
+            document.getElementById("weatherG").innerHTML=data.hourly[5].text;
+            document.getElementById("windG").innerHTML=data.hourly[5].windDir;
+
+            document.getElementById("timeH").innerHTML=whatTime(data.hourly[6].fxTime);
+            document.getElementById("tempH").innerHTML=data.hourly[6].temp+"℃";
+            document.getElementById("weatherH").innerHTML=data.hourly[6].text;
+            document.getElementById("windH").innerHTML=data.hourly[6].windDir;
+
+            document.getElementById("timeI").innerHTML=whatTime(data.hourly[7].fxTime);
+            document.getElementById("tempI").innerHTML=data.hourly[7].temp+"℃";
+            document.getElementById("weatherI").innerHTML=data.hourly[7].text;
+            document.getElementById("windI").innerHTML=data.hourly[7].windDir;
+
+            document.getElementById("timeJ").innerHTML=whatTime(data.hourly[8].fxTime);
+            document.getElementById("tempJ").innerHTML=data.hourly[8].temp+"℃";
+            document.getElementById("weatherJ").innerHTML=data.hourly[8].text;
+            document.getElementById("windJ").innerHTML=data.hourly[8].windDir;
+
+            document.getElementById("timeK").innerHTML=whatTime(data.hourly[9].fxTime);
+            document.getElementById("tempK").innerHTML=data.hourly[9].temp+"℃";
+            document.getElementById("weatherK").innerHTML=data.hourly[9].text;
+            document.getElementById("windK").innerHTML=data.hourly[9].windDir;
+
+            document.getElementById("timeL").innerHTML=whatTime(data.hourly[10].fxTime);
+            document.getElementById("tempL").innerHTML=data.hourly[10].temp+"℃";
+            document.getElementById("weatherL").innerHTML=data.hourly[10].text;
+            document.getElementById("windL").innerHTML=data.hourly[10].windDir;
+
+            document.getElementById("timeM").innerHTML=whatTime(data.hourly[11].fxTime);
+            document.getElementById("tempM").innerHTML=data.hourly[11].temp+"℃";
+            document.getElementById("weatherM").innerHTML=data.hourly[11].text;
+            document.getElementById("windM").innerHTML=data.hourly[11].windDir;
+        }
+    </script>
+
+    <script>
+        function whatTime(data)
+        {
+            var arrayDate=data.split('')
+            var timeIs=arrayDate[11]+arrayDate[12]+arrayDate[13]+arrayDate[14]+arrayDate[15];
+            return timeIs;
+        }
+    </script>
+
+    <!-- 将从后台获取到的天气预报对应的日期字符串拆分为字符后重组为数字并输入CaculateWeekDay函数计算对应星期 -->
+    <script>
+        function findDay(x,weather)
+        {
+            //console.log(x);
+            //console.log(weather);
+            var dayArray=weather.daily[x].fxDate.split('');
+            //console.log(dayArray);
+            var dayYear=parseInt(dayArray[0]+dayArray[1]+dayArray[2]+dayArray[3]);
+            var dayMonth=parseInt(dayArray[5]+dayArray[6]);
+            var dayDay=parseInt(dayArray[8]+dayArray[9]);
+            //console.log(dayYear);
+            //console.log(dayMonth);
+            //console.log(dayDay);
+            var weekDay=CaculateWeekDay(dayYear,dayMonth,dayDay);
+            return weekDay;
+        }
+    </script>
+
+    <!-- 将输入的日期利用基姆拉尔森计算公式转化为星期 -->
+    <script>
+        function CaculateWeekDay(y,m,d)
+        {
+            if(m==1) m=13;
+            if(m==2) m=14;
+            var week=(d+2*m+3*(m+1)/5+y+y/4-y/100+y/400)%7;
+            //console.log(week);
+            var weekstr="";
+                switch(Math.round(week))
+                {
+                    case 0: weekstr="星期日"; break;
+                    case 1: weekstr="星期一"; break;
+                    case 2: weekstr="星期二"; break;
+                    case 3: weekstr="星期三"; break;
+                    case 4: weekstr="星期四"; break;
+                    case 5: weekstr="星期五"; break;
+                    case 6: weekstr="星期六"; break;
+                    case 7: weekstr="星期日"; break;
+                }
+            //console.log(weekstr);
+            return weekstr;
+        }
+    </script>
+
+    <!-- 对早晚的天气/风向进行比较，相同则输出其中一个，不同则以XX转XX的格式输出 -->
+    <script>
+        function compareWeather(dayW,nightW)
+        {
+            if(dayW==nightW)
+            {
+                var sameW=dayW;
+                return sameW;
+            }
+            else
+            {
+                var differentW=dayW+"转"+nightW;
+                return differentW;
+            }
+        }
+    </script>
+
+    <!-- 综合早晚风速的变化得出当天风速变化的范围 -->
+    <script>
+        /*主体函数*/
+        function windspeedChange(dayW,nightW)
+        {
+            if(dayW==nightW)
+            {
+                var sameW=dayW;
+                return sameW;
+            }
+            else
+            {
+                var arrayA=dayW.split('');
+                var arrayB=nightW.split('');
+                var arrayW=new Array(arrayA[0],arrayA[2],arrayB[0],arrayB[2]);
+                arrayW.sort(sortNumber);
+                var differentW=arrayW[0]+"-"+arrayW[3];
+                return differentW;
+            }
+        }
+        /*比较两数大小，JavaScript调用sort函数排序时需要使用*/
+        function sortNumber(a,b)
+        {
+            return a-b;
+        }
+    </script>
+
+    <script>
+        function changePic(data)
+        {
+            var K=data.now.text;
+            var arrayZ=data.now.obsTime.split('');
+            monthZ=parseInt(arrayZ[5]+arrayZ[6]);
+            hourZ=parseInt(arrayZ[11]+arrayZ[12]);
+            if(K=="晴")
+            {
+                if(hourZ<=19&&hourZ>=5)    //白天
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)    //冬天
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_clearsky.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
+                    }
+                }
+                else    //晚上
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)    //冬天
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_clearsky.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_clearsky.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                    }
+                }
+            }
+            else if(K=="阴")
+            {
+                if(hourZ<=19&&hourZ>=5)
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_cloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_cloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
+                    }
+                }
+                else
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_cloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_cloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                    }
+                }
+            }
+            else if(K=="雾"||K=="大雾"||K=="霾"||K=="雾霾"||K=="薄雾"||K=="扬沙"||K=="浮尘"||K=="沙尘暴"||K=="强沙尘暴"||K=="浓雾"||K=="强浓雾"||K=="中度霾"||K=="重度霾"||K=="严重霾"||K=="特强浓雾"||K==""||K==""||K==""||K=="")
+            {
+                if(hourZ<=19&&hourZ>=5)
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_fog.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_fog.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
+                    }
+                }
+                else
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_cloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_cloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                    }
+                }
+            }
+            else if(K=="多云"||K=="少云"||K=="晴间多云")
+            {
+                if(hourZ<=19&&hourZ>=5)
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_partlycloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_partlycloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
+                    }
+                }
+                else
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_partlycloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_partlycloudy.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                    }
+                }
+            }
+            else if(K=="雨"||K=="大雨"||K=="中雨"||K=="小雨"||K=="雷阵雨"||K=="阵雨"||K=="强阵雨"||K=="强雷阵雨"||K=="雷阵雨伴有冰雹"||K=="极端降雨"||K=="细雨"||K=="毛毛雨"||K=="暴雨"||K=="大暴雨"||K=="特大暴雨"||K=="冻雨"||K=="小到中雨"||K=="中到大雨"||K=="大到暴雨"||K=="暴雨到大暴雨"||K=="大暴雨到特大暴雨")
+            {
+                if(hourZ<=19&&hourZ>=5)
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_rain.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_rain.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
+                    }
+                }
+                else
+                {
+                    if(monthZ==12||monthZ==1||monthZ==2)
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_rain.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                        for(var i=0;i<2;i++)
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                    }
+                    else
+                    {
+                        document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_rain.png)";
+                        document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                        for(var i=0;i<2;i++)    
+                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                        for(var i=0;i<4;i++)
+                            document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                    }
+                }
+            }
+            else if(K=="小雪"||K=="中雪"||K=="大雪"||K=="暴雪"||K=="雨夹雪"||K=="雨雪天气"||K=="阵雨夹雪"||K=="阵雪"||K=="小到中雪"||K=="中到大雪"||K=="大到暴雪"||K=="雪")
+            {
+                if(hourZ<=19&&hourZ>=5)
+                {
+                    document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_snow.png)";
+                    document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
+                    for(var i=0;i<2;i++)
+                        document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
+                    for(var i=0;i<4;i++)
+                        document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
+                }
+                else
+                {
+                    document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_snow.png)";
+                    document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
+                    for(var i=0;i<2;i++)
+                        document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
+                    for(var i=0;i<4;i++)
+                        document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

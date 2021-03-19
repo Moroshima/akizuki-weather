@@ -1,0 +1,330 @@
+@font-face {
+    font-family:'Source Han Sans CN';
+    src: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Fonts/DroidSansFallback.ttf)format('truetype');
+}
+
+#back
+{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    min-width: 1000px;
+    z-index:-10;
+    zoom: 1;
+    background-color: #fff;
+    background: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+}
+
+#back:after
+{
+    content: "index";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: inherit;
+    filter: blur(4px);
+    z-index: -9;
+}
+
+#transparent
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.5);
+    z-index: -8;
+}
+
+#read
+{
+    float:right;
+    width:600px;      
+    height:40px; 
+    line-height: 40px;
+    background-color: white;
+    border:2px solid #2e4e7e;  
+    border-radius:20px;
+}
+
+#readin
+{
+    border: none;
+    width: 560px;
+    height: 36px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#readin:focus
+{
+    outline: medium;
+}
+
+#read:hover
+{
+    border-color: #2e4e7e8f;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#search
+{
+    position: relative;
+    float:right;
+    width: 70px;
+    height: 42px;
+    background-color: #2e4e7e;
+    color: white;
+    border: 1px solid #2e4e7e; 
+    border-radius:21px;
+    padding: 0.5% 0%;
+    margin: 2px 5px;
+    letter-spacing: 2px;
+}
+
+#search:focus
+{
+    outline: medium;
+}
+
+#search:hover
+{
+    border-color: rgba(255,255,255,0.5);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#topMain
+{
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: "Source Han Sans CN";
+    font-size: 36px;
+    text-shadow: rgba(0, 0, 0, 0.801) 0.1em 0.1em 0.2em;
+}
+
+#spacing
+{
+    height:20px
+}
+
+#searchMain
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#middleMain
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#leftMain
+{
+    display: flex;
+    flex-direction: column;
+    background: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png);
+    background-size: 100%;
+    height: 355px;
+    width: 400px;
+    float: left;
+    border-radius:21px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    align-items: center;
+}
+
+.fubuki
+{
+    font-family: "Source Han Sans CN";
+    color: white; 
+}
+
+#locationName
+{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#nowtemp
+{
+    height: 80px;
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#maxmin
+{
+    width:40px;
+    height:80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#nowTemp
+{
+    font-size: 75px;
+    font-weight: 400;
+}
+
+.rightBlock
+{
+    height: 75px;
+    width: 560px;
+    border-radius:16px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: "Source Han Sans CN";
+}
+
+.empty
+{
+    height: 18px;
+}
+
+.dayWeekDay
+{
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+}
+
+.weatherWind
+{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+}
+
+.weatherTemp
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+}
+
+.windWindspeed
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+}
+
+.weekW
+{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.weatherTemp
+{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.transparent
+{
+    color: rgba(255, 255, 255, 0.8)
+}
+
+#switchBlock
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.hiei
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    font-family: "Source Han Sans CN";
+}
+
+.kongo
+{
+    height: 170px;
+    width: 1070px;
+    border-radius:16px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-image: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: "Source Han Sans CN";
+}
+
+#bottomBlock
+{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.sakura
+{
+    width: 80px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+
+.bTime
+{
+    font-size: 16px;
+}
+
+.bTemp
+{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.bWeather
+{
+    font-size: 17px;
+}
