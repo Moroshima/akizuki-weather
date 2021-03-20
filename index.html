@@ -7,7 +7,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" charset="utf-8">
-    <!-- 自定义CSS布局 -->
+    <!-- 外部引入CSS布局 -->
     <link rel="stylesheet" href="index.css" type="text/css"/>
     
     <!-- jQuery -->
@@ -18,8 +18,11 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@4.3.0/dist/echarts.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-    
+    <!-- 外部引入JS文件 -->
+    <script src="index.js"></script>
+
 </head>
+
 <body>
     <!--背景部分归属div-->
     <div id="back">
@@ -891,7 +894,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_clearsky.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_clearsky_2x4.png)";
                     }
@@ -900,7 +903,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png)";
                     }
@@ -912,7 +915,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_clearsky.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
                     }
@@ -921,7 +924,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_clearsky.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_clearsky_2x4.png)";
                     }
@@ -936,7 +939,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_cloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_cloudy_2x4.png)";
                     }
@@ -945,7 +948,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_cloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_cloudy_2x4.png)";
                     }
@@ -957,7 +960,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_cloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                     }
@@ -966,7 +969,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_cloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                     }
@@ -981,7 +984,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_fog.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_fog_2x4.png)";
                     }
@@ -990,7 +993,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_fog.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_fog_2x4.png)";
                     }
@@ -1002,7 +1005,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_cloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                     }
@@ -1011,7 +1014,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_cloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_cloudy_2x4.png)";
                     }
@@ -1026,7 +1029,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_partlycloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_partlycloudy_2x4.png)";
                     }
@@ -1035,7 +1038,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_partlycloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_partlycloudy_2x4.png)";
                     }
@@ -1047,7 +1050,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_partlycloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
                     }
@@ -1056,7 +1059,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_partlycloudy.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_partlycloudy_2x4.png)";
                     }
@@ -1071,7 +1074,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_day_rain.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/winter_day_rain_2x4.png)";
                     }
@@ -1080,7 +1083,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_rain.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_rain_2x4.png)";
                     }
@@ -1092,7 +1095,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/winter_night_rain.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
                         for(var i=0;i<2;i++)
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
                     }
@@ -1101,7 +1104,7 @@
                         document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_rain.png)";
                         document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
                         for(var i=0;i<2;i++)    
-                            document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
+                            document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
                         for(var i=0;i<4;i++)
                             document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_rain_2x4.png)";
                     }
@@ -1114,7 +1117,7 @@
                     document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_snow.png)";
                     document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
                     for(var i=0;i<2;i++)
-                        document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
+                        document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
                     for(var i=0;i<4;i++)
                         document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_snow_2x4.png)";
                 }
@@ -1123,7 +1126,7 @@
                     document.getElementById("leftMain").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/night_snow.png)";
                     document.getElementById("back").style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
                     for(var i=0;i<2;i++)
-                        document.getElementsByClassName("kongo")[0].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
+                        document.getElementsByClassName("kongo")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
                     for(var i=0;i<4;i++)
                         document.getElementsByClassName("rightBlock")[i].style.backgroundImage="url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/night_snow_2x4.png)";
                 }
