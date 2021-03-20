@@ -1,1 +1,3 @@
-毛玻璃和Material Design忠实爱好者，思源黑体宗教信仰者
+#### 关于作者
+
+毛玻璃、Fluent Design和Material Design的忠实拥趸，索尼大法信仰者。
