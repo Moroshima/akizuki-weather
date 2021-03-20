@@ -1,5 +1,5 @@
 @font-face {
-    font-family:'Source Han Sans CN';
+    font-family:'Source Han Sans CN'; /*虽然名字是思源黑体，但是这个字体实际上是索尼手机系统自带的默认字体*/
     src: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Fonts/DroidSansFallback.ttf)format('truetype');
 }
 
@@ -107,7 +107,7 @@
 
 #topMain /*顶部Akizuki Weather的样式*/
 {
-    height: 80px;
+    height: 70px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -151,7 +151,7 @@
     align-items: center;
 }
 
-.fubuki
+.fubuki /*Fubuki:吹雪，有风吹雪之意，此选择器仅对中部左侧block内字体进行调节*/
 {
     font-family: "Source Han Sans CN";
     color: white; 
@@ -204,9 +204,9 @@
     font-family: "Source Han Sans CN";
 }
 
-.empty
+.empty /*中部右侧四片卡片间间隔*/
 {
-    height: 18px;
+    height: 17px;
 }
 
 .dayWeekDay
