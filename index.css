@@ -220,7 +220,7 @@
 
 .weatherWind
 {
-    width: 200px;
+    width: 220px;
     display: flex;
     flex-direction: column;
     justify-content: right;
