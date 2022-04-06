@@ -1,19 +1,19 @@
 @font-face {
-    font-family:'Source Han Sans CN'; /*虽然名字是思源黑体，但是这个字体实际上是索尼手机系统自带的默认字体*/
-    src: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Fonts/DroidSansFallback.ttf)format('truetype');
+    font-family: 'Source Han Sans CN';
+    /*虽然名字是思源黑体，但是这个字体实际上是索尼手机系统自带的默认字体*/
+    src: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Fonts/DroidSansFallback.ttf), format('truetype');
 }
 
-#back
-{
-    position:absolute;
+#back {
+    position: absolute;
     top: 0;
     left: 0;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     min-width: 1000px;
-    z-index:-10;
+    z-index: -10;
     zoom: 1;
-    background-color: #fff;
+    /* background-color: #fff; */
     background: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Background/day_clearsky_2x4.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,9 +22,7 @@
     background-position: center 0;
 }
 
-#back:after
-{
-    content: "index";
+#back:after {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -35,78 +33,72 @@
     z-index: -9;
 }
 
-#transparent
-{
+#transparent {
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     z-index: -8;
 }
 
-#read
-{
-    float:right;
-    width:600px;      
-    height:40px; 
+#read {
+    float: right;
+    width: 600px;
+    height: 40px;
     line-height: 40px;
     background-color: white;
-    border:2px solid #2e4e7e;  
-    border-radius:20px;
+    border: 2px solid #2e4e7e;
+    border-radius: 20px;
 }
 
-#readin
-{
+#readin {
     border: none;
     width: 560px;
     height: 36px;
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#readin:focus
-{
+#readin:focus {
     outline: medium;
 }
 
-#read:hover
-{
+#read:hover {
     border-color: #2e4e7e8f;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-#search
-{
+#search {
     position: relative;
-    float:right;
+    float: right;
     width: 70px;
     height: 42px;
     background-color: #2e4e7e;
     color: white;
-    border: 1px solid #2e4e7e; 
-    border-radius:21px;
+    border: 1px solid #2e4e7e;
+    border-radius: 21px;
     padding: 0.5% 0%;
     margin: 2px 5px;
     letter-spacing: 2px;
 }
 
-#search:focus
-{
+#search:focus {
     outline: medium;
 }
 
-#search:hover
-{
-    border-color: rgba(255,255,255,0.5);
+#search:hover {
+    border-color: rgba(255, 255, 255, 0.5);
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-#topMain /*顶部Akizuki Weather的样式*/
-{
+#topMain
+
+/*顶部Akizuki Weather的样式*/
+    {
     height: 70px;
     display: flex;
     flex-direction: row;
@@ -118,27 +110,29 @@
     text-shadow: rgba(0, 0, 0, 0.801) 0.1em 0.1em 0.2em;
 }
 
-#spacing /*搜索栏与中部板块，中部板块与底部板块之间的间隔*/
-{
-    height:20px
+#spacing
+
+/*搜索栏与中部板块，中部板块与底部板块之间的间隔*/
+    {
+    height: 20px
 }
 
-#searchMain /*搜索框与搜索按钮所共在的Block块的样式*/
-{
+#searchMain
+
+/*搜索框与搜索按钮所共在的Block块的样式*/
+    {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#middleMain
-{
+#middleMain {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-#leftMain
-{
+#leftMain {
     display: flex;
     flex-direction: column;
     background: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png);
@@ -146,25 +140,25 @@
     height: 355px;
     width: 400px;
     float: left;
-    border-radius:21px;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    border-radius: 21px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     align-items: center;
 }
 
-.fubuki /*Fubuki:吹雪，有风吹雪之意，此选择器仅对中部左侧block内字体进行调节*/
-{
+.fubuki
+
+/*Fubuki:吹雪，有风吹雪之意，此选择器仅对中部左侧block内字体进行调节*/
+    {
     font-family: "Source Han Sans CN";
-    color: white; 
+    color: white;
 }
 
-#locationName
-{
+#locationName {
     font-size: 24px;
     font-weight: 600;
 }
 
-#nowtemp
-{
+#nowtemp {
     height: 80px;
     width: 120px;
     display: flex;
@@ -173,28 +167,25 @@
     align-items: center;
 }
 
-#maxmin
-{
-    width:40px;
-    height:80px;
+#maxmin {
+    width: 40px;
+    height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#nowTemp
-{
+#nowTemp {
     font-size: 75px;
     font-weight: 400;
 }
 
-.rightBlock
-{
+.rightBlock {
     height: 75px;
     width: 560px;
-    border-radius:16px;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    border-radius: 16px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     background: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png);
     display: flex;
     flex-direction: row;
@@ -204,13 +195,14 @@
     font-family: "Source Han Sans CN";
 }
 
-.empty /*中部右侧四片卡片间间隔*/
-{
+.empty
+
+/*中部右侧四片卡片间间隔*/
+    {
     height: 17px;
 }
 
-.dayWeekDay
-{
+.dayWeekDay {
     width: 100px;
     display: flex;
     flex-direction: column;
@@ -218,8 +210,7 @@
     align-items: center;
 }
 
-.weatherWind
-{
+.weatherWind {
     width: 220px;
     display: flex;
     flex-direction: column;
@@ -227,49 +218,45 @@
     align-items: center;
 }
 
-.weatherTemp
-{
+.weatherTemp {
     display: flex;
     flex-direction: row;
     justify-content: right;
     align-items: center;
 }
 
-.windWindspeed
-{
+.windWindspeed {
     display: flex;
     flex-direction: row;
     justify-content: right;
     align-items: center;
 }
 
-.weekW
-{
+.weekW {
     font-size: 20px;
     font-weight: 600;
 }
 
-.weatherTemp
-{
+.weatherTemp {
     font-size: 20px;
     font-weight: 600;
 }
 
-.transparent
-{
+.transparent {
     color: rgba(255, 255, 255, 0.8)
 }
 
-#switchBlock
-{
+.switchBlock {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.hiei /*点击切换按钮的样式表*/
-{
+.hiei
+
+/*点击切换按钮的样式表*/
+    {
     margin: 0;
     padding: 0;
     border: 0;
@@ -280,12 +267,14 @@
     font-family: "Source Han Sans CN";
 }
 
-.kongo /*底部逐小时天气预报显示的chart的样式*/
-{
+.kongo
+
+/*底部逐小时天气预报显示的chart的样式*/
+    {
     height: 170px;
     width: 1070px;
-    border-radius:16px;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    border-radius: 16px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     background-image: url(https://cdn.jsdelivr.net/gh/moroshima/CDN-Weather@1.0/Weather/day_clearsky.png);
     display: flex;
     flex-direction: row;
@@ -295,16 +284,20 @@
     font-family: "Source Han Sans CN";
 }
 
-#bottomBlock /*底部逐小时天气预报整个大的Block块的样式*/
-{
+#bottomBlock
+
+/*底部逐小时天气预报整个大的Block块的样式*/
+    {
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: row;
 }
 
-.sakura /*底部逐小时天气预报中每个小时小的div块的样式调节*/
-{
+.sakura
+
+/*底部逐小时天气预报中每个小时小的div块的样式调节*/
+    {
     width: 80px;
     justify-content: center;
     align-items: center;
@@ -313,18 +306,18 @@
     float: left;
 }
 
-.bTime /*自此往下的三个b开头的选择器都是指向底部(bottom)小div块中元素的微调*/
-{
+.bTime
+
+/*自此往下的三个b开头的选择器都是指向底部(bottom)小div块中元素的微调*/
+    {
     font-size: 16px;
 }
 
-.bTemp
-{
+.bTemp {
     font-size: 22px;
     font-weight: 600;
 }
 
-.bWeather
-{
+.bWeather {
     font-size: 17px;
 }
